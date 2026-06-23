@@ -1,0 +1,13 @@
+playwright.config.ts is for managing settings like browsers and timeouts, and yes, I will edit it to configure my project.
+
+package.json is the project manifest that stores scripts and dependencies, and yes, I will edit it to add new packages.
+
+package-lock.json tracks the exact versions of downloaded packages, and no, I should never edit it manually because npm manages it.
+
+node_modules/ is the folder holding all the downloaded library code, and no, I must never edit it or commit it to Git.
+
+tests/ is the directory where my test files live, and yes, this is the main place where I will be working and writing code.
+
+tests-examples/ contains sample tests provided by Playwright, and I should read it to learn, then delete it.
+
+.gitignore tells Git which files and reports to hide, and sometimes I will edit it if I need to block new files.
