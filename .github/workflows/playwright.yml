@@ -13,10 +13,19 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - name: Use Public npm Registry
-      run: npm config set registry https://registry.npmjs.org/
+
+    # 👇 ЖЕСТКО ЗАПРЕЩАЕМ ЛЮБЫЕ КОРПОРАТИВНЫЕ ССЫЛКИ И ПЕРЕНАПРАВЛЯЕМ ИХ НА PUBLIC
+    - name: Force rewrite all registry URLs
+      run: |
+        npm config set registry https://registry.npmjs.org/
+        rm -f package-lock.json
+        # Заменяем все упоминания корпоративного сервера в конфигурации npm на публичный
+        npm config set @nerdwallet:registry https://registry.npmjs.org/
+        # Если в проекте есть файл .npmrc, мы его тоже стираем, чтобы он не мешал
+        rm -f .npmrc
+
     - name: Install dependencies
-      run: npm install
+      run: npm install --no-audit --no-fund
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
