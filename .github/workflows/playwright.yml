@@ -9,19 +9,17 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/checkout@v4.2.2
+    - uses: actions/setup-node@v4.2.0
       with:
         node-version: lts/*
 
-    # 👇 ЖЕСТКО ЗАПРЕЩАЕМ ЛЮБЫЕ КОРПОРАТИВНЫЕ ССЫЛКИ И ПЕРЕНАПРАВЛЯЕМ ИХ НА PUBLIC
+    # Force rewrite all registry URLs
     - name: Force rewrite all registry URLs
       run: |
         npm config set registry https://registry.npmjs.org/
         rm -f package-lock.json
-        # Заменяем все упоминания корпоративного сервера в конфигурации npm на публичный
         npm config set @nerdwallet:registry https://registry.npmjs.org/
-        # Если в проекте есть файл .npmrc, мы его тоже стираем, чтобы он не мешал
         rm -f .npmrc
 
     - name: Install dependencies
@@ -30,7 +28,7 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v4.6.1
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
