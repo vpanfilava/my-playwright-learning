@@ -9,11 +9,10 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-    # Использование v5 полностью решает проблему совместимости с Node
     - uses: actions/checkout@v5
     - uses: actions/setup-node@v5
       with:
-        node-version: '24' # Явно указываем Node.js 24, чтобы не было никаких предупреждений
+        node-version: '24'
 
     # Force rewrite all registry URLs
     - name: Force rewrite all registry URLs
@@ -29,7 +28,9 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
-    - uses: actions/upload-artifact@v4
+    
+    # 👇 Обновляем до точной версии, которая уже дружит с Node 24
+    - uses: actions/upload-artifact@v4.6.1
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
