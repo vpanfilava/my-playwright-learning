@@ -9,12 +9,12 @@ test.describe("SauceDemo", () => {
   test.describe("Login Page Validations", () => {
     
     test.beforeEach(async ({ page }) => {
-      // Every test in this block starts fresh on the home page landing view
+      // Every test in this block starts fresh on the home page landing view.
       await page.goto('https://www.saucedemo.com');
     });
 
     // Task 1 — Happy Path Login (Manually executes login steps to verify the feature)
-    test.only ('Task 1 - Should successfully log in and redirect to inventory', async ({ page }) => {
+    test ('Task 1 - Should successfully log in and redirect to inventory', async ({ page }) => {
       await page.locator('[data-test="username"]').fill('standard_user');
       await page.locator('[data-test="password"]').fill('secret_sauce');
       await page.locator('[data-test="login-button"]').click();
