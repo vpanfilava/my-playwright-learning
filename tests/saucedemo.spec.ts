@@ -67,8 +67,20 @@ test.describe("SauceDemo", () => {
         'Scenario C Failed: The error text did not explicitly state that the Username is required when submitting only a password'
       ).toContainText('Epic sadface: Username is required');
     });
-  });
 
+    // 👇 YOUR NEW TEST LIVES HERE
+    test('Should display an explicit error message when logging in as a locked out user', async ({ page }) => {
+      await page.locator('[data-test="username"]').fill('locked_out_user');
+      await page.locator('[data-test="password"]').fill('secret_sauce');
+      await page.locator('[data-test="login-button"]').click();
+
+      await expect(
+        page.locator('[data-test="error"]'),
+        'The error box failed to display the exact lockout text for a locked_out_user submission'
+      ).toHaveText('Epic sadface: Sorry, this user has been locked out.');
+    });
+
+  }); // <--- This closes the "Login Page Validations" sub-suite
 
   // ========================================
   // --- SUB-SUITE 2: AUTHENTICATED TESTS ---
