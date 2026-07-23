@@ -9,7 +9,7 @@ test.describe("SauceDemo", () => {
   test.describe("Login Page Validations", () => {
     
     test.beforeEach(async ({ page }) => {
-      // Every test in this block starts fresh on the home page landing view
+      // Every test in this block starts fresh on the home page landing view.
       await page.goto('https://www.saucedemo.com');
     });
 
@@ -147,7 +147,7 @@ test.describe("SauceDemo", () => {
       ).toHaveText("2");
     });
 
-    // Task 9 — Sorting
+    // Task 9 — Sorting 
     test('Task 9 - Should dynamically reorder product list when sorting filter changes', async ({ page }) => {
       await page.locator('[data-test="product-sort-container"]').selectOption('lohi');
       const firstProductTitle = page.locator('.inventory_item_name').first();
