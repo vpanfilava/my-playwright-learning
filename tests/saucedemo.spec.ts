@@ -14,7 +14,7 @@ test.describe("SauceDemo", () => {
     });
 
     // Task 1 — Happy Path Login (Manually executes login steps to verify the feature)
-    test('Task 1 - Should successfully log in and redirect to inventory', async ({ page }) => {
+    test.only ('Task 1 - Should successfully log in and redirect to inventory', async ({ page }) => {
       await page.locator('[data-test="username"]').fill('standard_user');
       await page.locator('[data-test="password"]').fill('secret_sauce');
       await page.locator('[data-test="login-button"]').click();
